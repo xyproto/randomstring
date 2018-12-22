@@ -20,7 +20,7 @@ func String(length int) string {
 	return string(b)
 }
 
-/* HumanFriendlyString generates a random, but human-friendly, string of
+/*HumanFriendlyString generates a random, but human-friendly, string of
  * the given length. It should be possible to read out loud and send in an email
  * without problems. The string alternates between vowels and consontants.
  *
@@ -44,31 +44,29 @@ func HumanFriendlyString(length int) string {
 		} else if rand.Intn(100) > 0 { // 99 of 100 times
 			b[i] = someConsonants[rand.Intn(len(someConsonants))]
 			// Don't repeat
-			if i >= 1 {
-				if b[i] == b[i-1] {
-					// Also use more vowels
-					vowelDistribution = 1
-					// Then try again
-					goto again
-				}
+			if i >= 1 && b[i] == b[i-1] {
+				// Also use more vowels
+				vowelDistribution = 1
+				// Then try again
+				goto again
+				// This is also be possible, instead of using goto:
+				//i--
+				//continue
 			}
 		} else {
 			b[i] = moreLetters[rand.Intn(len(moreLetters))]
 			// Don't repeat
-			if i >= 1 {
-				if b[i] == b[i-1] {
-					// Also use more vowels
-					vowelDistribution = 1
-					// Then try again
-					goto again
-				}
+			if i >= 1 && b[i] == b[i-1] {
+				// Also use more vowels
+				vowelDistribution = 1
+				// Then try again
+				goto again
 			}
 		}
 		// Avoid three letters in a row
-		if i >= 2 {
-			if b[i] == b[i-2] {
-				goto again
-			}
+		if i >= 2 && b[i] == b[i-2] {
+			// Then try again
+			goto again
 		}
 	}
 	return string(b)
