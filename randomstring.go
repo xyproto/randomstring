@@ -49,9 +49,6 @@ func HumanFriendlyString(length int) string {
 				vowelDistribution = 1
 				// Then try again
 				goto again
-				// This is also be possible, instead of using goto:
-				//i--
-				//continue
 			}
 		} else {
 			b[i] = moreLetters[rand.Intn(len(moreLetters))]
