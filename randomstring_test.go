@@ -14,6 +14,7 @@ func TestString(t *testing.T) {
 }
 
 func TestHumanFriendlyString(t *testing.T) {
+	fmt.Printf("%s\n", HumanFriendlyString(7))
 	fmt.Printf("%s\n", HumanFriendlyString(20))
 }
 

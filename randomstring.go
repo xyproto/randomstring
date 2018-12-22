@@ -26,7 +26,7 @@ func String(length int) string {
  *
  * Google Translate believes the output is Samoan.
  *
- * Example output for length 10: ookeouvapu
+ * Example output for length 7: rabunor
  */
 func HumanFriendlyString(length int) string {
 	const (
