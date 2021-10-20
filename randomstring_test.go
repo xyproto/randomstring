@@ -25,3 +25,8 @@ func TestCookieFriendlyString(t *testing.T) {
 func TestEnglishFrequencyString(t *testing.T) {
 	fmt.Printf("%s\n", EnglishFrequencyString(20))
 }
+
+func TestHumanFriendlyEnglishString(t *testing.T) {
+	fmt.Printf("%s\n", HumanFriendlyEnglishString(7))
+	fmt.Printf("%s\n", HumanFriendlyEnglishString(20))
+}

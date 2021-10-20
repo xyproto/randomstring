@@ -223,3 +223,45 @@ func CookieFriendlyString(length int) string {
 	}
 	return string(b)
 }
+
+/*HumanFriendlyEnglishString generates a random, but human-friendly, string of
+ * the given length. It should be possible to read out loud and send in an email
+ * without problems. The string alternates between vowels and consontants.
+ *
+ * The vowels and consontants are wighted by the frequency table
+ */
+func HumanFriendlyEnglishString(length int) string {
+	vowelOffset := rand.Intn(2)
+	vowelDistribution := 2
+	b := make([]byte, length)
+	for i := 0; i < length; i++ {
+	again:
+		if (i+vowelOffset)%vowelDistribution == 0 {
+			b[i] = byte(PickVowel())
+		} else if rand.Intn(100) > 0 { // 99 of 100 times
+			b[i] = byte(PickCons())
+			// Don't repeat
+			if i >= 1 && b[i] == b[i-1] {
+				// Also use more vowels
+				vowelDistribution = 1
+				// Then try again
+				goto again
+			}
+		} else {
+			b[i] = byte(PickLetter())
+			// Don't repeat
+			if i >= 1 && b[i] == b[i-1] {
+				// Also use more vowels
+				vowelDistribution = 1
+				// Then try again
+				goto again
+			}
+		}
+		// Avoid three letters in a row
+		if i >= 2 && b[i] == b[i-2] {
+			// Then try again
+			goto again
+		}
+	}
+	return string(b)
+}
