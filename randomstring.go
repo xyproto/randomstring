@@ -3,8 +3,62 @@ package randomstring
 
 import (
 	"math/rand"
+	"strings"
 	"time"
 )
+
+var freq = map[rune]int{
+	'e': 21912,
+	't': 16587,
+	'a': 14810,
+	'o': 14003,
+	'i': 13318,
+	'n': 12666,
+	's': 11450,
+	'r': 10977,
+	'h': 10795,
+	'd': 7874,
+	'l': 7253,
+	'u': 5246,
+	'c': 4943,
+	'm': 4761,
+	'f': 4200,
+	'y': 3853,
+	'w': 3819,
+	'g': 3693,
+	'p': 3316,
+	'b': 2715,
+	'v': 2019,
+	'k': 1257,
+	'x': 315,
+	'q': 205,
+	'j': 188,
+	'z': 128,
+}
+
+// freqsum is a sum of all the frequencies in the freq map
+var freqsum = func() int {
+	n := 0
+	for _, v := range freq {
+		n += v
+	}
+	return n
+}()
+
+// pick a letter, weighted by the frequency table
+func pickletter() rune {
+	target := rand.Intn(freqsum)
+	selected := 'a'
+	n := 0
+	for k, v := range freq {
+		n += v
+		if n >= target {
+			selected = k
+			break
+		}
+	}
+	return selected
+}
 
 // Seed the random number generator in one of many possible ways.
 func Seed() {
@@ -18,6 +72,16 @@ func String(length int) string {
 		b[i] = byte(rand.Int63() & 0xff)
 	}
 	return string(b)
+}
+
+// EnglishFrequencyString returns a random string that uses the letter frequency of English,
+// ref: http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
+func EnglishFrequencyString(length int) string {
+	var sb strings.Builder
+	for i := 0; i < length; i++ {
+		sb.WriteRune(pickletter())
+	}
+	return sb.String()
 }
 
 /*HumanFriendlyString generates a random, but human-friendly, string of
