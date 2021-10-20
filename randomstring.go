@@ -36,6 +36,38 @@ var freq = map[rune]int{
 	'z': 128,
 }
 
+var freqVowel = map[rune]int{
+	'e': 21912,
+	'a': 14810,
+	'o': 14003,
+	'i': 13318,
+	'u': 5246,
+}
+
+var freqCons = map[rune]int{
+	't': 16587,
+	'n': 12666,
+	's': 11450,
+	'r': 10977,
+	'h': 10795,
+	'd': 7874,
+	'l': 7253,
+	'c': 4943,
+	'm': 4761,
+	'f': 4200,
+	'y': 3853,
+	'w': 3819,
+	'g': 3693,
+	'p': 3316,
+	'b': 2715,
+	'v': 2019,
+	'k': 1257,
+	'x': 315,
+	'q': 205,
+	'j': 188,
+	'z': 128,
+}
+
 // freqsum is a sum of all the frequencies in the freq map
 var freqsum = func() int {
 	n := 0
@@ -45,12 +77,60 @@ var freqsum = func() int {
 	return n
 }()
 
-// pick a letter, weighted by the frequency table
-func pickletter() rune {
+// freqsumVowel is a sum of all the frequencies in the freqVowel map
+var freqsumVowel = func() int {
+	n := 0
+	for _, v := range freqVowel {
+		n += v
+	}
+	return n
+}()
+
+// freqsumCons is a sum of all the frequencies in the freqCons map
+var freqsumCons = func() int {
+	n := 0
+	for _, v := range freqCons {
+		n += v
+	}
+	return n
+}()
+
+// PickLetter will pick a letter, weighted by the frequency table
+func PickLetter() rune {
 	target := rand.Intn(freqsum)
 	selected := 'a'
 	n := 0
 	for k, v := range freq {
+		n += v
+		if n >= target {
+			selected = k
+			break
+		}
+	}
+	return selected
+}
+
+// PickVowel will pick a vowel, weighted by the frequency table
+func PickVowel() rune {
+	target := rand.Intn(freqsumVowel)
+	selected := 'a'
+	n := 0
+	for k, v := range freqVowel {
+		n += v
+		if n >= target {
+			selected = k
+			break
+		}
+	}
+	return selected
+}
+
+// PickCons will pick a consonant, weighted by the frequency table
+func PickCons() rune {
+	target := rand.Intn(freqsumCons)
+	selected := 't'
+	n := 0
+	for k, v := range freqCons {
 		n += v
 		if n >= target {
 			selected = k
@@ -79,7 +159,7 @@ func String(length int) string {
 func EnglishFrequencyString(length int) string {
 	var sb strings.Builder
 	for i := 0; i < length; i++ {
-		sb.WriteRune(pickletter())
+		sb.WriteRune(PickLetter())
 	}
 	return sb.String()
 }
