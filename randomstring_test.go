@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+// Uncomment this function to see that rand.NewSource(1) is the same as the unseeded behavior before Go 1.20
 func init() {
 	Seed()
 }
