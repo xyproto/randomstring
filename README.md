@@ -13,6 +13,7 @@ func String(length int) string
 func EnglishFrequencyString(length int) string
 func HumanFriendlyString(length int) string
 func CookieFriendlyString(length int) string
+func CookieFriendlyBytes(length int) []byte
 func HumanFriendlyEnglishString(length int) string
 ```
 

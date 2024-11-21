@@ -23,6 +23,10 @@ func TestCookieFriendlyString(t *testing.T) {
 	fmt.Printf("%s\n", CookieFriendlyString(20))
 }
 
+func TestCookieFriendlyBytes(t *testing.T) {
+	fmt.Printf("%s\n", CookieFriendlyBytes(20))
+}
+
 func TestEnglishFrequencyString(t *testing.T) {
 	fmt.Printf("%s\n", EnglishFrequencyString(20))
 }

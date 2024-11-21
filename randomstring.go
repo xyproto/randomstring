@@ -215,8 +215,7 @@ func HumanFriendlyString(length int) string {
 	return string(b)
 }
 
-// CookieFriendlyString generates a random, but cookie-friendly, string of
-// the given length.
+// CookieFriendlyString generates a random, but cookie-friendly, string of the given length.
 func CookieFriendlyString(length int) string {
 	const allowed = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	b := make([]byte, length)
@@ -226,7 +225,17 @@ func CookieFriendlyString(length int) string {
 	return string(b)
 }
 
-/*HumanFriendlyEnglishString generates a random, but human-friendly, string of
+// CookieFriendlyBytes generates a random, but cookie-friendly, byte slice of the given length.
+func CookieFriendlyBytes(length int) []byte {
+	const allowed = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	b := make([]byte, length)
+	for i := 0; i < length; i++ {
+		b[i] = allowed[random.Intn(len(allowed))]
+	}
+	return b
+}
+
+/* HumanFriendlyEnglishString generates a random, but human-friendly, string of
  * the given length. It should be possible to read out loud and send in an email
  * without problems. The string alternates between vowels and consontants.
  *
