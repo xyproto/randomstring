@@ -104,7 +104,7 @@ func PickLetter() rune {
 	n := 0
 	for k, v := range freq {
 		n += v
-		if n >= target {
+		if n > target {
 			selected = k
 			break
 		}
@@ -119,7 +119,7 @@ func PickVowel() rune {
 	n := 0
 	for k, v := range freqVowel {
 		n += v
-		if n >= target {
+		if n > target {
 			selected = k
 			break
 		}
@@ -134,7 +134,7 @@ func PickCons() rune {
 	n := 0
 	for k, v := range freqCons {
 		n += v
-		if n >= target {
+		if n > target {
 			selected = k
 			break
 		}
