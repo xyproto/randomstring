@@ -252,7 +252,7 @@ func CookieFriendlyBytes(length int) []byte {
 	return b
 }
 
-/* HumanFriendlyEnglishString generates a random, but human-friendly, string of
+/*HumanFriendlyEnglishString generates a random, but human-friendly, string of
  * the given length. It should be possible to read out loud and send in an email
  * without problems. The string alternates between vowels and consontants.
  *
